@@ -6,8 +6,6 @@ $transactions=[]
 puts "WELCOME TO BANKING SYSTEM"
 $accounts={1000 => {"name" => "sudhansh","mobile" => 7218341563,"balance" => 0}, 1001 => {"name" => "ramesh","mobile" => 8888888888,"balance" => 100}}
 
-flag=true
-
 #to check valid account number
 def validate_account_number(acc_number)
   if $accounts[acc_number] == nil
