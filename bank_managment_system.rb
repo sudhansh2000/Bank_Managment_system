@@ -33,7 +33,7 @@ while flag
           puts "⚠️ mobile number enterd is invalid only 10 numbers are allowed , please try again "
           retake_input=true
         end
-        if !retake_input
+        unless retake_input
           puts "Enter account holder's initial account balance"
           init_balance = gets.chomp.to_i
           if ( init_balance < 0 )
