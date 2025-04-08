@@ -6,38 +6,6 @@ accounts={1000 => {"name" => "sudhansh","mobile" => 7218341563,"balance" => 0}, 
 
 flag=true
 
-# def add_acount
-#   retake_input = true
-#   puts "Enter account holder name"
-#   name = gets.chomp
-#   while inputarr
-  
-#     retake_input = false
-#     puts "Enter account holder mobile number"
-#     mobile_no = gets.chomp
-
-#     if ( mobile_no.to_i.to_s.size != 10 || mobile_no.to_i.to_s.size != mobile_no.size )
-#       puts "⚠️ mobile number enterd is invalid only 10 numbers are allowed , please try again "
-#       retake_input=true
-#       end
-#     unless retake_input
-#       puts "Enter account holder's initial account balance"
-#       init_balance = gets.chomp.to_i
-#       if ( init_balance < 0 )
-#        puts "⚠️  value cannot be negative value"
-#         retake_input = true
-#       end
-#     end
-#   end
-  
-#   accounts[$account_number_generator] = { "name" => name, "mobile" => mobile_no, "balance" => init_balance }
-
-#   # accounts [$account_number_generator]={"name" => name ,"mobile" => mobile_no , "balance" => init_balance}
-#   puts "✅ account added sucessfully with account number #{ $account_number_generator} and information as #{accounts[ $account_number_generator - 1]}"
-#   $account_number_generator += 1
-#   return 1
-# end
-
 while flag
   puts "****************************************"
   puts "enter 1 to add account"
