@@ -6,6 +6,38 @@ accounts={1000 => {"name" => "sudhansh","mobile" => 7218341563,"balance" => 0}, 
 
 flag=true
 
+# def add_acount
+#   retake_input = true
+#   puts "Enter account holder name"
+#   name = gets.chomp
+#   while inputarr
+  
+#     retake_input = false
+#     puts "Enter account holder mobile number"
+#     mobile_no = gets.chomp
+
+#     if ( mobile_no.to_i.to_s.size != 10 || mobile_no.to_i.to_s.size != mobile_no.size )
+#       puts "⚠️ mobile number enterd is invalid only 10 numbers are allowed , please try again "
+#       retake_input=true
+#       end
+#     unless retake_input
+#       puts "Enter account holder's initial account balance"
+#       init_balance = gets.chomp.to_i
+#       if ( init_balance < 0 )
+#        puts "⚠️  value cannot be negative value"
+#         retake_input = true
+#       end
+#     end
+#   end
+  
+#   accounts[$account_number_generator] = { "name" => name, "mobile" => mobile_no, "balance" => init_balance }
+
+#   # accounts [$account_number_generator]={"name" => name ,"mobile" => mobile_no , "balance" => init_balance}
+#   puts "✅ account added sucessfully with account number #{ $account_number_generator} and information as #{accounts[ $account_number_generator - 1]}"
+#   $account_number_generator += 1
+#   return 1
+# end
+
 while flag
   puts "****************************************"
   puts "enter 1 to add account"
@@ -29,7 +61,7 @@ while flag
         
         puts "Enter account holder mobile number"
         mobile_no = gets.chomp
-        if ( mobile_no.to_i.to_s.size != 10 || mobile_no.to_i.to_s.size! = mobile_no.size )
+        if ( mobile_no.to_i.to_s.size != 10 || mobile_no.to_i.to_s.size != mobile_no.size )
           puts "⚠️ mobile number enterd is invalid only 10 numbers are allowed , please try again "
           retake_input=true
         end
@@ -46,32 +78,31 @@ while flag
       accounts [ $account_number_generator ] = {"name" => name ,"mobile" => mobile_no , "balance" => init_balance}
       $account_number_generator += 1
       puts "✅ account added sucessfully with account number #{ $account_number_generator - 1 } and information as #{accounts[ $account_number_generator - 1]}"
-      
       #add account
     when 2
       puts " Enter account number to deposite money"
-      accnumber = gets.chomp.to_i
+      acc_number = gets.chomp.to_i
       
-      if accounts[ accnumber ] == nil
-        puts "⚠️ Account not found with account number #{accnumber} please check the number"
+      if accounts[ acc_number ] == nil
+        puts "⚠️ Account not found with account number #{acc_number} please check the number"
       else
         puts "enter amount you want to deposite into account"
         balance = gets.chomp.to_i
         
-        if( init_balance < 0 )
+        if( balance < 0 )
         puts "⚠️  value cannot be negative value please try again"
           break ;
         end
 
-        accounts[ accnumber ][ "balance" ] = accounts[accnumber]["balance"] + balance
-        puts "✅ account deposited sucessfully ,updated account balance for account number #{accnumber} is #{accounts[accnumber]["balance"]} ₹"
+        accounts[ acc_number ][ "balance" ] = accounts[acc_number]["balance"] + balance
+        puts "✅ account deposited sucessfully ,updated account balance for account number #{acc_number} is #{accounts[acc_number]["balance"]} ₹"
       end
       #deposite money
     when 3 
       puts "Enter account number to withdraw money"
-      accnumber = gets.chomp.to_i
-      if accounts[accnumber] == nil
-        puts "⚠️ Account not found with account number #{accnumber} please check the number"
+      acc_number = gets.chomp.to_i
+      if accounts[acc_number] == nil
+        puts "⚠️ Account not found with account number #{acc_number} please check the number"
       else
         puts "enter amount you want to withdraw into account"
         balance = gets.chomp.to_i
@@ -80,26 +111,26 @@ while flag
           puts "⚠️  value cannot be negative value please try again"
           break;
           
-        elsif( balance > accounts[ accnumber ][ "balance" ] )
+        elsif( balance > accounts[ acc_number ][ "balance" ] )
           puts "⚠️  insufficent account balance,amount not debited please try again⚠️"
-          puts "Amount present in your bank account - #{accounts[accnumber]["balance"]}"
+          puts "Amount present in your bank account - #{accounts[acc_number]["balance"]}"
           
         else
         
-          accounts[accnumber]["balance"] = accounts[accnumber]["balance"] - balance
-          puts "✅ account debited sucessfully ,updated account balance for account number #{accnumber} is #{accounts[accnumber]["balance"]} ₹"
+          accounts[acc_number]["balance"] = accounts[acc_number]["balance"] - balance
+          puts "✅ account debited sucessfully ,updated account balance for account number #{acc_number} is #{accounts[acc_number]["balance"]} ₹"
         end
       end
       
       #withdraw money
     when 4
       puts "Enter account number to check the account balance"
-      accnumber = gets.chomp.to_i
-      if accounts[ accnumber ] == nil
-        puts "⚠️ Account not found with account number #{accnumber} please check the number"
+      acc_number = gets.chomp.to_i
+      if accounts[ acc_number ] == nil
+        puts "⚠️ Account not found with account number #{acc_number} please check the number"
       else
         puts "fetching account balnce "
-        puts "balance avaible in account number #{accnumber} is #{accounts[accnumber]["balance"]} ₹"
+        puts "balance avaible in account number #{acc_number} is #{accounts[acc_number]["balance"]} ₹"
       end
       #check balance
     when 5
