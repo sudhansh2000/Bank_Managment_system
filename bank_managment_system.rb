@@ -1,14 +1,11 @@
-# frozen_string_literal: true
-
 # class bank
+# module Bannk
 class Bank
   attr_accessor :accounts, :transactions, :account_number_generator
 
-  @account_number_generator = 1002
-
   def initialize
-    self.accounts = { 1000 => { 'name' => 'sudhansh', 'mobile' => '7218341563', 'balance' => 0 }, 1001 => {'name' => 'ramesh', 'mobile' => '8888888888','balance' => 100 }}
-    self.transactions = []
+    self.accounts = { 1000 => { 'name' => 'sudhansh', 'mobile' => '7218341563', 'balance' => 0 }, 1001 => {' name' => 'ramesh', 'mobile' => '8888888888','balance' => 100 }}
+    self.transactions = { 1000 => [{ 'amount' => 100, 'type' => 'debit', 'balance' => 0 }, { 'amount' => 200, 'type' => 'credit', 'balance' => 100 }], 1001 => []}
     self.account_number_generator = 1002
   end
 
@@ -37,7 +34,6 @@ class Bank
     while true
       puts 'Enter account holder name'
       name = gets.chomp
-      # name.match(/^[a-zA-Z ]*$/) == nil ? puts "⚠️ Only charaters are allowed , please try again": break
       break if name.match?(/^[a-zA-Z ]*$/)
 
       puts '⚠️ Only charaters are allowed , please try again'
@@ -45,7 +41,7 @@ class Bank
 
     while true
       puts 'Enter account holder mobile number'
-      mobile_no = gets.chomp # check mobile number using regular expressions  
+      mobile_no = gets.chomp
       break if mobile_no.match?(/^\d{10}$/)
 
       puts '⚠️ mobile number enterd is invalid only 10 numbers are allowed , please try again '
@@ -58,8 +54,9 @@ class Bank
     end
 
     @accounts [@account_number_generator] = { 'name' => name, 'mobile' => mobile_no, 'balance' => init_balance.to_i }
+    @transactions[@account_number_generator] = []
     @account_number_generator += 1
-    puts "✅ account added sucessfully with account number #{ @account_number_generator - 1} and information as #{ @accounts[@account_number_generator - 1] }"
+    puts "✅ account added sucessfully with account number #{@account_number_generator - 1} and information as #{@accounts[@account_number_generator - 1]}"
   end
 
   # function to add money to specifc account
@@ -75,8 +72,8 @@ class Bank
     @accounts[acc_number]['balance'] = @accounts[acc_number]['balance'] + balance.to_i
     puts "✅ account deposited sucessfully ,updated account balance for account number #{acc_number} is #{@accounts[acc_number]["balance"]} ₹"
 
-    @transactions.push({ 'account_number' => acc_number, 'amount' => balance.to_i, 'type' => 'credited ' })
-    # puts $transations
+    @transactions[acc_number] << { 'amount' => balance.to_i, 'type' => 'credit', 'balance' => @accounts[acc_number]['balance'] }
+    puts @transactions[acc_number]
   end
 
   # function to withdraw money from account
@@ -97,7 +94,7 @@ class Bank
       @accounts[acc_number]['balance'] = @accounts[acc_number]['balance'] - balance.to_i
       puts "✅ account debited sucessfully ,updated account balance for account number #{acc_number} is #{@accounts[acc_number]['balance']} ₹"
 
-      @transactions.push({'account_number' => acc_number, 'amount' => balance.to_i, 'type' => 'debited'})
+      @transactions[acc_number] = @transactions[acc_number].push({ 'amount' => balance.to_i, 'type' => 'debited', 'balance' => @accounts[acc_number]['balance'] })
     end
   end
 
@@ -120,11 +117,19 @@ class Bank
 
   # displays all the transations
   def dispaly_all_transactions
-    puts @transactions
+    puts 'enter account number to check the transations'
+    acc_number = gets.chomp.to_i
+    return unless validate_account_number(acc_number)
+
+    puts "Account \t amount \t type \t balance"
+
+    @transactions[acc_number].each { |hash|
+      puts "#{acc_number} \t #{hash['amount']} \t #{hash['type']} \t #{hash['balance']}"
+    }
   end
 end
 
-b1 = Bank.new
+bank = Bank.new
 
 while true
   puts '****************************************'
@@ -140,17 +145,17 @@ while true
   ch = gets.chomp.to_i
   case ch
   when 1
-    b1.add_acount
+    bank.add_acount
   when 2
-    b1.deposite_money
+    bank.deposite_money
   when 3
-    b1.withdraw_money
+    bank.withdraw_money
   when 4
-    b1.check_balance
+    bank.check_balance
   when 5
-    b1.display_all_account_details
+    bank.display_all_account_details
   when 6
-    b1.dispaly_all_transactions
+    bank.dispaly_all_transactions
   when 7
     break
   else
