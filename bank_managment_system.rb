@@ -1,32 +1,13 @@
-# class bank
-# module Bannk
+require_relative 'bank_module'
+# Bank class
 class Bank
   attr_accessor :accounts, :transactions, :account_number_generator
 
+  include BankMethods
   def initialize
     self.accounts = { 1000 => { 'name' => 'sudhansh', 'mobile' => '7218341563', 'balance' => 0 }, 1001 => {' name' => 'ramesh', 'mobile' => '8888888888','balance' => 100 }}
     self.transactions = { 1000 => [{ 'amount' => 100, 'type' => 'debit', 'balance' => 0 }, { 'amount' => 200, 'type' => 'credit', 'balance' => 100 }], 1001 => []}
     self.account_number_generator = 1002
-  end
-
-  # to check valid account number
-  def validate_account_number(acc_number)
-    return true unless @accounts[acc_number].nil?
-
-    puts "⚠️ Account not found with account number #{acc_number} please check the number"
-    false
-  end
-
-  # to check valid balance input
-  def valid_balance(balance)
-    if balance.to_i <= 0
-      puts '⚠️  value cannot be negative or zero value please try again'
-      return false
-    elsif !balance.match?(/^[\d.]*$/)
-      puts '⚠️ only integer values are allowed please try again'
-      return false
-    end
-    true
   end
 
   # function to add new account 
@@ -73,7 +54,6 @@ class Bank
     puts "✅ account deposited sucessfully ,updated account balance for account number #{acc_number} is #{@accounts[acc_number]["balance"]} ₹"
 
     @transactions[acc_number] << { 'amount' => balance.to_i, 'type' => 'credit', 'balance' => @accounts[acc_number]['balance'] }
-    puts @transactions[acc_number]
   end
 
   # function to withdraw money from account
